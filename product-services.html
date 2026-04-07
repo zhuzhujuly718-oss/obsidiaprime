@@ -590,6 +590,29 @@
       font-weight: 600;
     }
 
+    .pillar-hero {
+      margin: 0 -2.25rem 2rem;
+      overflow: hidden;
+      border-top: 1px solid rgba(192, 192, 192, 0.04);
+      border-bottom: 1px solid rgba(192, 192, 192, 0.04);
+    }
+
+    .pillar-hero img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.92) saturate(0.9);
+      transition: filter 0.5s;
+    }
+
+    @media (hover: hover) {
+      .service-pillar:hover .pillar-hero img {
+        filter: brightness(1) saturate(1);
+      }
+    }
+
     .product-lines {
       display: flex;
       flex-direction: column;
@@ -1181,6 +1204,11 @@
         padding: 1.75rem 1.25rem 1.5rem;
       }
 
+      .pillar-hero {
+        margin-left: -1.25rem;
+        margin-right: -1.25rem;
+      }
+
       .product-card {
         padding: 1.25rem 1rem;
       }
@@ -1365,6 +1393,7 @@
       <article class="service-pillar reveal" id="seller">
         <p class="service-pillar-tag">Seller Side</p>
         <h3 class="service-pillar-title">卖方端：流动性释放与溢价塑造</h3>
+        <div class="pillar-hero"><img src="img/pillar-seller.png" alt="房源诊断、Staging 与重新定价" loading="lazy"></div>
         <p class="service-pillar-lead">以<strong>全案总包</strong>串联诊断、呈现与渠道；在复杂退出场景下由中台法税介入推进<strong>税务摩擦极小化</strong>。</p>
 
         <div class="product-lines">
@@ -1418,6 +1447,7 @@
       <article class="service-pillar reveal" id="buyer">
         <p class="service-pillar-tag">Buyer Side</p>
         <h3 class="service-pillar-title">买方端：寻猎标的与底线防御</h3>
+        <div class="pillar-hero"><img src="img/pillar-buyer.png" alt="尽职调查、一票否决与法律穹顶" loading="lazy"></div>
         <p class="service-pillar-lead">打破信息孤岛，全链路数据与法务支撑；发现重大合规瑕疵时行使<strong>一票否决权</strong>，并配套资产隔离结构。</p>
 
         <div class="product-lines">
@@ -1457,6 +1487,7 @@
       <article class="service-pillar reveal" id="experience">
         <p class="service-pillar-tag">Trust Delivery</p>
         <h3 class="service-pillar-title">交互体验与契约保障</h3>
+        <div class="pillar-hero"><img src="img/pillar-experience.png" alt="合规路径与交易架构设计" loading="lazy"></div>
         <p class="service-pillar-lead">以对标<strong>家族办公室</strong>的交互品质与严苛契约，沉淀可复用的资产视图与终极信任。</p>
 
         <div class="product-lines">
@@ -1501,6 +1532,7 @@
       <article class="service-pillar reveal" id="lifecycle">
         <p class="service-pillar-tag">Lifecycle Partnership</p>
         <h3 class="service-pillar-title">资产管理全周期陪伴</h3>
+        <div class="pillar-hero"><img src="img/pillar-lifecycle.png" alt="跨界智库与异业资源对接" loading="lazy"></div>
         <p class="service-pillar-lead">房产交割只是开始。市场、理财、教育<strong>异业联动</strong>，让每一次资源对接都有黑曜的品质背书。</p>
 
         <div class="product-lines">
