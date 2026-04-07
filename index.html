@@ -77,14 +77,16 @@
       color: var(--white);
     }
 
+    /* 行内图片默认基线留白，易产生顶部细「白线」；改为块级消除 */
     .nav-logo img {
-      width: 44px;
+      display: block;
+      flex-shrink: 0;
+      width: 52px;
       height: auto;
-      max-height: 40px;
+      max-height: 48px;
       object-fit: contain;
       border: none;
       outline: none;
-      vertical-align: middle;
     }
 
     .nav-logo-text {
@@ -201,13 +203,15 @@
         var(--black);
     }
 
+    /* 去掉浅色网格线，避免被看成「白边」；仅保留极弱结构感 */
     .hero-geometric {
       position: absolute;
       inset: 0;
-      opacity: 0.03;
+      opacity: 1;
+      pointer-events: none;
       background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,255,255,0.5) 80px, rgba(255,255,255,0.5) 81px),
-        repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,255,255,0.5) 80px, rgba(255,255,255,0.5) 81px);
+        repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,255,255,0.012) 80px, rgba(255,255,255,0.012) 81px),
+        repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,255,255,0.012) 80px, rgba(255,255,255,0.012) 81px);
     }
 
     .hero-content {
@@ -219,11 +223,12 @@
     }
 
     .hero-logo-icon {
-      width: min(300px, 88vw);
+      width: min(420px, 92vw);
       height: auto;
-      margin: 0 auto 2rem;
+      margin: 0 auto 2.25rem;
       opacity: 0;
       animation: fadeUp 1s 0.3s forwards;
+      background: transparent;
     }
 
     .hero-logo-icon img {
@@ -231,9 +236,10 @@
       height: auto;
       display: block;
       object-fit: contain;
-      filter: drop-shadow(0 4px 32px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 28px rgba(192, 192, 192, 0.12));
       border: none;
       outline: none;
+      /* 避免 drop-shadow 在透明 PNG 边缘形成一圈灰/亮边 */
+      filter: none;
     }
 
     .hero-title {
@@ -257,15 +263,6 @@
       margin-bottom: 2.5rem;
       opacity: 0;
       animation: fadeUp 1s 0.7s forwards;
-    }
-
-    .hero-divider {
-      width: 60px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--silver), transparent);
-      margin: 0 auto 2.5rem;
-      opacity: 0;
-      animation: fadeUp 1s 0.9s forwards;
     }
 
     .hero-tagline {
@@ -770,9 +767,11 @@
     }
 
     .footer-brand img {
-      width: 36px;
+      display: block;
+      flex-shrink: 0;
+      width: 44px;
       height: auto;
-      max-height: 34px;
+      max-height: 42px;
       object-fit: contain;
       border: none;
       outline: none;
@@ -938,7 +937,7 @@
       }
 
       .hero-logo-icon {
-        width: min(88vw, 260px);
+        width: min(92vw, 340px);
         height: auto;
         margin-bottom: 1.5rem;
       }
@@ -1119,7 +1118,6 @@
       </div>
       <h1 class="hero-title">黑曜 OBSIDIA PRIME</h1>
       <p class="hero-subtitle">不动产管理顾问事务所</p>
-      <div class="hero-divider"></div>
       <p class="hero-tagline">
         以家族办公室与投资银行的最高标准<br>
         为您提供跨越经济周期的不动产财富管家服务
