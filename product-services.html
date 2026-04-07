@@ -613,11 +613,62 @@
       }
     }
 
+    .pillar-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pillar-details summary {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      cursor: pointer;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      color: var(--silver);
+      padding: 0.85rem 0;
+      border-top: 1px solid rgba(192, 192, 192, 0.06);
+      list-style: none;
+      user-select: none;
+      transition: color 0.3s;
+    }
+
+    .pillar-details summary::-webkit-details-marker { display: none; }
+
+    .pillar-details summary::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--silver);
+      border-bottom: 1.5px solid var(--silver);
+      transform: rotate(-45deg);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+
+    .pillar-details[open] summary::before {
+      transform: rotate(45deg);
+    }
+
+    .pillar-details summary:hover {
+      color: var(--white);
+    }
+
+    .pillar-details .product-lines {
+      animation: detailSlide 0.35s ease forwards;
+    }
+
+    @keyframes detailSlide {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
     .product-lines {
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      flex: 1;
+      padding-top: 0.75rem;
     }
 
     .product-card {
@@ -1396,51 +1447,54 @@
         <div class="pillar-hero"><img src="img/pillar-seller.png" alt="房源诊断、Staging 与重新定价" loading="lazy"></div>
         <p class="service-pillar-lead">以<strong>全案总包</strong>串联诊断、呈现与渠道；在复杂退出场景下由中台法税介入推进<strong>税务摩擦极小化</strong>。</p>
 
-        <div class="product-lines">
-          <div class="product-card">
-            <div class="product-card-head">
-              <span class="product-card-num">01</span>
-              <h4>房源诊断与重新定价</h4>
-            </div>
-            <div class="product-card-body">
-              <p>对房源权属、地段产业赋能及学区价值多维体检，结合真实成交与波动趋势锚定可辩护的价格区间。</p>
-              <div class="deliver-row">
-                <span class="deliver-label">交付</span>
-                <span class="deliver-tag">《房源诊断报告》</span>
-                <span class="deliver-tag">《市场动态月报》</span>
+        <details class="pillar-details">
+          <summary>查看服务详情</summary>
+          <div class="product-lines">
+            <div class="product-card">
+              <div class="product-card-head">
+                <span class="product-card-num">01</span>
+                <h4>房源诊断与重新定价</h4>
+              </div>
+              <div class="product-card-body">
+                <p>对房源权属、地段产业赋能及学区价值多维体检，结合真实成交与波动趋势锚定可辩护的价格区间。</p>
+                <div class="deliver-row">
+                  <span class="deliver-label">交付</span>
+                  <span class="deliver-tag">《房源诊断报告》</span>
+                  <span class="deliver-tag">《市场动态月报》</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="product-card">
-            <div class="product-card-head">
-              <span class="product-card-num">02</span>
-              <h4>视觉呈现与总包推盘</h4>
-            </div>
-            <div class="product-card-body">
-              <p>Staging 空间呈现 + 故事化图文/视频内容包装；以总包方身份系统化录入并设定高分佣比例，调动渠道高效推盘。</p>
-              <div class="deliver-row">
-                <span class="deliver-label">交付</span>
-                <span class="deliver-tag">定制图文/视频物料</span>
-                <span class="deliver-tag">《营销效果分析》</span>
+            <div class="product-card">
+              <div class="product-card-head">
+                <span class="product-card-num">02</span>
+                <h4>视觉呈现与总包推盘</h4>
+              </div>
+              <div class="product-card-body">
+                <p>Staging 空间呈现 + 故事化图文/视频内容包装；以总包方身份系统化录入并设定高分佣比例，调动渠道高效推盘。</p>
+                <div class="deliver-row">
+                  <span class="deliver-label">交付</span>
+                  <span class="deliver-tag">定制图文/视频物料</span>
+                  <span class="deliver-tag">《营销效果分析》</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="product-card">
-            <div class="product-card-head">
-              <span class="product-card-num">03</span>
-              <h4>复杂产权剥离与税务筹划</h4>
-            </div>
-            <div class="product-card-body">
-              <p>企业代持、离婚析产或连环置换等场景，通过产权剥离、股权转让、特殊重组等合规路径组合压降税务摩擦至合法极小值。</p>
-              <div class="deliver-row">
-                <span class="deliver-label">交付</span>
-                <span class="deliver-tag">《税务剥离与交易架构全案规划书》</span>
+            <div class="product-card">
+              <div class="product-card-head">
+                <span class="product-card-num">03</span>
+                <h4>复杂产权剥离与税务筹划</h4>
+              </div>
+              <div class="product-card-body">
+                <p>企业代持、离婚析产或连环置换等场景，通过产权剥离、股权转让、特殊重组等合规路径组合压降税务摩擦至合法极小值。</p>
+                <div class="deliver-row">
+                  <span class="deliver-label">交付</span>
+                  <span class="deliver-tag">《税务剥离与交易架构全案规划书》</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </details>
       </article>
 
       <!-- ═══ 右上：买方端 ═══ -->
@@ -1450,37 +1504,40 @@
         <div class="pillar-hero"><img src="img/pillar-buyer.png" alt="尽职调查、一票否决与法律穹顶" loading="lazy"></div>
         <p class="service-pillar-lead">打破信息孤岛，全链路数据与法务支撑；发现重大合规瑕疵时行使<strong>一票否决权</strong>，并配套资产隔离结构。</p>
 
-        <div class="product-lines">
-          <div class="product-card">
-            <div class="product-card-head">
-              <span class="product-card-num">01</span>
-              <h4>需求画像与暗盘寻猎</h4>
-            </div>
-            <div class="product-card-body">
-              <p>深挖底层配置诉求（学区、宜居、远期流动性），多维估值模型在全域含未公开暗盘匹配标的，并提供逻辑闭合、可追溯的议价支撑。</p>
-              <div class="deliver-row">
-                <span class="deliver-label">交付</span>
-                <span class="deliver-tag">定制商业演示材料</span>
-                <span class="deliver-tag">《资产价值评估书》</span>
+        <details class="pillar-details">
+          <summary>查看服务详情</summary>
+          <div class="product-lines">
+            <div class="product-card">
+              <div class="product-card-head">
+                <span class="product-card-num">01</span>
+                <h4>需求画像与暗盘寻猎</h4>
+              </div>
+              <div class="product-card-body">
+                <p>深挖底层配置诉求（学区、宜居、远期流动性），多维估值模型在全域含未公开暗盘匹配标的，并提供逻辑闭合、可追溯的议价支撑。</p>
+                <div class="deliver-row">
+                  <span class="deliver-label">交付</span>
+                  <span class="deliver-tag">定制商业演示材料</span>
+                  <span class="deliver-tag">《资产价值评估书》</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="product-card">
-            <div class="product-card-head">
-              <span class="product-card-num">02</span>
-              <h4>尽职调查与一票否决</h4>
-            </div>
-            <div class="product-card-body">
-              <p>中台法务独立核实产权状态，代表买方极端条款优化；发现重大合规漏洞时可<strong>强制中止交易</strong>。同步搭建有限合伙或信托实现婚前财产与企业风险的物理隔离。</p>
-              <div class="deliver-row">
-                <span class="deliver-label">交付</span>
-                <span class="deliver-tag">《风险隔离法律意见书》</span>
-                <span class="deliver-tag">《税务健康度体检报告》</span>
+            <div class="product-card">
+              <div class="product-card-head">
+                <span class="product-card-num">02</span>
+                <h4>尽职调查与一票否决</h4>
+              </div>
+              <div class="product-card-body">
+                <p>中台法务独立核实产权状态，代表买方极端条款优化；发现重大合规漏洞时可<strong>强制中止交易</strong>。同步搭建有限合伙或信托实现婚前财产与企业风险的物理隔离。</p>
+                <div class="deliver-row">
+                  <span class="deliver-label">交付</span>
+                  <span class="deliver-tag">《风险隔离法律意见书》</span>
+                  <span class="deliver-tag">《税务健康度体检报告》</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </details>
       </article>
 
       <!-- ═══ 左下：交互体验与契约保障 ═══ -->
@@ -1490,42 +1547,45 @@
         <div class="pillar-hero"><img src="img/pillar-experience.png" alt="合规路径与交易架构设计" loading="lazy"></div>
         <p class="service-pillar-lead">以对标<strong>家族办公室</strong>的交互品质与严苛契约，沉淀可复用的资产视图与终极信任。</p>
 
-        <div class="product-lines">
-          <div class="product-card">
-            <div class="product-card-head">
-              <span class="product-card-num">01</span>
-              <h4>数字化交互与宏观洞察</h4>
-            </div>
-            <div class="product-card-body">
-              <p>将市场数据转译为宏观经济与投资叙事，通过私域设备可视化呈现配置结构、热力图与情景对比。</p>
-              <div class="deliver-row">
-                <span class="deliver-label">交付</span>
-                <span class="deliver-tag">交互式资产驾驶舱</span>
-                <span class="deliver-tag">《资产流动性报告》</span>
+        <details class="pillar-details">
+          <summary>查看服务详情</summary>
+          <div class="product-lines">
+            <div class="product-card">
+              <div class="product-card-head">
+                <span class="product-card-num">01</span>
+                <h4>数字化交互与宏观洞察</h4>
+              </div>
+              <div class="product-card-body">
+                <p>将市场数据转译为宏观经济与投资叙事，通过私域设备可视化呈现配置结构、热力图与情景对比。</p>
+                <div class="deliver-row">
+                  <span class="deliver-label">交付</span>
+                  <span class="deliver-tag">交互式资产驾驶舱</span>
+                  <span class="deliver-tag">《资产流动性报告》</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="product-card">
-            <div class="product-card-head">
-              <span class="product-card-num">02</span>
-              <h4>契约与信息隔离墙</h4>
-            </div>
-            <div class="product-card-body">
-              <p>系统级<strong>信息隔离墙</strong>与指定代理机制，杜绝双边代理；严苛条款锁定服务边界：</p>
-              <ul class="service-contract-list">
-                <li><strong>NDA —</strong> 底牌不进公域，泄密承担惩罚性赔偿。</li>
-                <li><strong>Fee Cap —</strong> 单笔或连环单总费用上限约定。</li>
-                <li><strong>净水与解约 —</strong> 零暗箱回扣，不满意可随时解约。</li>
-              </ul>
-              <div class="deliver-row">
-                <span class="deliver-label">交付</span>
-                <span class="deliver-tag">《单边代理协议》</span>
-                <span class="deliver-tag">《单边委托合同》</span>
+            <div class="product-card">
+              <div class="product-card-head">
+                <span class="product-card-num">02</span>
+                <h4>契约与信息隔离墙</h4>
+              </div>
+              <div class="product-card-body">
+                <p>系统级<strong>信息隔离墙</strong>与指定代理机制，杜绝双边代理；严苛条款锁定服务边界：</p>
+                <ul class="service-contract-list">
+                  <li><strong>NDA —</strong> 底牌不进公域，泄密承担惩罚性赔偿。</li>
+                  <li><strong>Fee Cap —</strong> 单笔或连环单总费用上限约定。</li>
+                  <li><strong>净水与解约 —</strong> 零暗箱回扣，不满意可随时解约。</li>
+                </ul>
+                <div class="deliver-row">
+                  <span class="deliver-label">交付</span>
+                  <span class="deliver-tag">《单边代理协议》</span>
+                  <span class="deliver-tag">《单边委托合同》</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </details>
       </article>
 
       <!-- ═══ 右下：资产管理全周期陪伴 ═══ -->
@@ -1535,36 +1595,39 @@
         <div class="pillar-hero"><img src="img/pillar-lifecycle.png" alt="跨界智库与异业资源对接" loading="lazy"></div>
         <p class="service-pillar-lead">房产交割只是开始。市场、理财、教育<strong>异业联动</strong>，让每一次资源对接都有黑曜的品质背书。</p>
 
-        <div class="product-lines">
-          <div class="product-card">
-            <div class="product-card-head">
-              <span class="product-card-num">01</span>
-              <h4>核心区市场暗报与趋势洞察</h4>
-            </div>
-            <div class="product-card-body">
-              <p>每周为您整理推送高净值人群极度关注的核心区地产市场流动性暗报、全球理财对冲趋势以及国际名校教育规划信息，确保您始终掌握决策先机。</p>
-              <div class="deliver-row">
-                <span class="deliver-label">交付</span>
-                <span class="deliver-tag">《核心区地产流动性与重组暗报》</span>
+        <details class="pillar-details">
+          <summary>查看服务详情</summary>
+          <div class="product-lines">
+            <div class="product-card">
+              <div class="product-card-head">
+                <span class="product-card-num">01</span>
+                <h4>核心区市场暗报与趋势洞察</h4>
+              </div>
+              <div class="product-card-body">
+                <p>每周为您整理推送高净值人群极度关注的核心区地产市场流动性暗报、全球理财对冲趋势以及国际名校教育规划信息，确保您始终掌握决策先机。</p>
+                <div class="deliver-row">
+                  <span class="deliver-label">交付</span>
+                  <span class="deliver-tag">《核心区地产流动性与重组暗报》</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="product-card">
-            <div class="product-card-head">
-              <span class="product-card-num">02</span>
-              <h4>顶级异业资源对接</h4>
-            </div>
-            <div class="product-card-body">
-              <p>无论设立家族信托、办理海外身份还是高端理财，通过顶级异业合作网络——私人银行、红圈律所、教育规划机构——为您无缝对接专属资源。</p>
-              <div class="deliver-row">
-                <span class="deliver-label">交付</span>
-                <span class="deliver-tag">闭门私享沙龙入场券</span>
-                <span class="deliver-tag">私行RM/红圈律师面诊通道</span>
+            <div class="product-card">
+              <div class="product-card-head">
+                <span class="product-card-num">02</span>
+                <h4>顶级异业资源对接</h4>
+              </div>
+              <div class="product-card-body">
+                <p>无论设立家族信托、办理海外身份还是高端理财，通过顶级异业合作网络——私人银行、红圈律所、教育规划机构——为您无缝对接专属资源。</p>
+                <div class="deliver-row">
+                  <span class="deliver-label">交付</span>
+                  <span class="deliver-tag">闭门私享沙龙入场券</span>
+                  <span class="deliver-tag">私行RM/红圈律师面诊通道</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </details>
       </article>
 
     </div>
