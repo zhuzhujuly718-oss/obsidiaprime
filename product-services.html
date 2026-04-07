@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>产品服务手册 · 黑曜 Obsidia Prime</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black: #0a0a0a;
+      --graphite: #1a1a1a;
+      --charcoal: #2a2a2a;
+      --dark-gray: #3a3a3a;
+      --mid-gray: #6a6a6a;
+      --silver: #9a9a9a;
+      --light-silver: #c0c0c0;
+      --platinum: #d8d8d8;
+      --off-white: #f0f0f0;
+      --white: #fafafa;
+      --accent: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 40%, #ffffff 50%, #e8e8e8 60%, #a0a0a0 100%);
+      --accent-gold: linear-gradient(135deg, #b0a090 0%, #d4c8b8 50%, #b0a090 100%);
+      --font-serif: 'Noto Serif SC', 'Georgia', serif;
+      --font-sans: 'Noto Sans SC', 'Helvetica Neue', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--black);
+      color: var(--platinum);
+      line-height: 1.8;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.nav-menu-open {
+      overflow: hidden;
+      touch-action: none;
+    }
+
+    ::selection {
+      background: rgba(192, 192, 192, 0.3);
+      color: #fff;
+    }
+
+    /* ===== Navigation ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav.scrolled {
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 1rem 4rem;
+      border-bottom: 1px solid rgba(192, 192, 192, 0.08);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .nav-logo img {
+      width: 44px;
+      height: auto;
+      max-height: 40px;
+      object-fit: contain;
+      border: none;
+      outline: none;
+      vertical-align: middle;
+    }
+
+    .nav-logo-text {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--silver);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--light-silver);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      margin: 0;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: var(--platinum);
+      -webkit-tap-highlight-color: transparent;
+      z-index: 1002;
+    }
+
+    .nav-toggle-bar {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: currentColor;
+      border-radius: 1px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav.is-open .nav-toggle-bar:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .nav.is-open .nav-toggle-bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav.is-open .nav-toggle-bar:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: 999;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .nav.is-open .nav-backdrop {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ===== Hero Section ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(60, 60, 60, 0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(80, 80, 80, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(40, 40, 40, 0.2) 0%, transparent 60%),
+        var(--black);
+    }
+
+    .hero-geometric {
+      position: absolute;
+      inset: 0;
+      opacity: 0.03;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,255,255,0.5) 80px, rgba(255,255,255,0.5) 81px),
+        repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,255,255,0.5) 80px, rgba(255,255,255,0.5) 81px);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+      max-width: 900px;
+    }
+
+    .hero-logo-icon {
+      width: min(300px, 88vw);
+      height: auto;
+      margin: 0 auto 2rem;
+      opacity: 0;
+      animation: fadeUp 1s 0.3s forwards;
+    }
+
+    .hero-logo-icon img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 32px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 28px rgba(192, 192, 192, 0.12));
+      border: none;
+      outline: none;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 1s 0.5s forwards;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-sans);
+      font-size: clamp(0.75rem, 1.5vw, 1rem);
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 1s 0.7s forwards;
+    }
+
+    .hero-divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--silver), transparent);
+      margin: 0 auto 2.5rem;
+      opacity: 0;
+      animation: fadeUp 1s 0.9s forwards;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-serif);
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      font-weight: 400;
+      color: var(--light-silver);
+      line-height: 2;
+      letter-spacing: 0.05em;
+      opacity: 0;
+      animation: fadeUp 1s 1.1s forwards;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 1s 1.5s forwards;
+    }
+
+    .hero-scroll span {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--silver), transparent);
+      animation: scrollPulse 2s infinite;
+    }
+
+    /* ===== Section Common ===== */
+    .section {
+      padding: 8rem 4rem;
+      position: relative;
+    }
+
+    .section-dark { background: var(--black); }
+    .section-darker { background: var(--graphite); }
+
+    .section-header {
+      max-width: 800px;
+      margin: 0 auto 5rem;
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .section-label::before,
+    .section-label::after {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--dark-gray);
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.08em;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: var(--silver);
+      line-height: 2;
+      font-weight: 300;
+    }
+
+    /* ===== Pain Point Section ===== */
+    .pain-section {
+      background: linear-gradient(180deg, var(--black) 0%, var(--graphite) 100%);
+    }
+
+    .pain-quote {
+      max-width: 750px;
+      margin: 0 auto 4rem;
+      padding: 3rem 3.5rem;
+      border-left: 2px solid var(--dark-gray);
+      position: relative;
+    }
+
+    .pain-quote::before {
+      content: '\201C';
+      position: absolute;
+      top: -0.5rem;
+      left: 1.5rem;
+      font-family: var(--font-serif);
+      font-size: 5rem;
+      color: var(--dark-gray);
+      line-height: 1;
+    }
+
+    .pain-quote p {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--light-silver);
+      line-height: 2.2;
+      font-weight: 400;
+    }
+
+    .pain-quote .highlight {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    /* ===== Mission Block ===== */
+    .mission-block {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 4px 1fr;
+      gap: 2.5rem;
+      padding: 3rem 0;
+    }
+
+    .mission-line {
+      background: linear-gradient(to bottom, var(--silver), transparent);
+      border-radius: 2px;
+    }
+
+    .mission-text h3 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .mission-text p {
+      font-size: 1rem;
+      color: var(--silver);
+      line-height: 2;
+      font-weight: 300;
+    }
+
+    /* ===== Services Section ===== */
+    .services-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: linear-gradient(145deg, rgba(42, 42, 42, 0.5), rgba(26, 26, 26, 0.8));
+      border: 1px solid rgba(192, 192, 192, 0.06);
+      border-radius: 2px;
+      padding: 3rem;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(192, 192, 192, 0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    @media (hover: hover) {
+      .service-card:hover {
+        border-color: rgba(192, 192, 192, 0.12);
+        transform: translateY(-4px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .service-card:hover::before { opacity: 1; }
+
+      .service-card:hover .service-img img {
+        filter: brightness(1) saturate(1);
+        transform: scale(1.02);
+      }
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--dark-gray);
+      border-radius: 50%;
+      color: var(--light-silver);
+    }
+
+    .service-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .service-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .service-card .service-en {
+      font-size: 0.7rem;
+      color: var(--mid-gray);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .service-card p {
+      font-size: 0.95rem;
+      color: var(--silver);
+      line-height: 1.9;
+      font-weight: 300;
+    }
+
+    .service-card .service-img {
+      width: 100%;
+      margin-top: 1.8rem;
+      border-radius: 2px;
+      overflow: hidden;
+      border: 1px solid rgba(192, 192, 192, 0.06);
+    }
+
+    .service-card .service-img img {
+      width: 100%;
+      display: block;
+      filter: brightness(0.9) saturate(0.85);
+      transition: all 0.5s;
+    }
+
+    /* ===== Product services pillars (卖方/买方/体验) ===== */
+    .services-pillars {
+      max-width: 920px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+
+    .service-pillar {
+      background: linear-gradient(145deg, rgba(42, 42, 42, 0.35), rgba(26, 26, 26, 0.65));
+      border: 1px solid rgba(192, 192, 192, 0.08);
+      border-radius: 2px;
+      padding: 2.75rem 2.5rem;
+      position: relative;
+    }
+
+    .service-pillar-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 0.75rem;
+    }
+
+    .service-pillar-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+      color: var(--white);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      margin-bottom: 1rem;
+      line-height: 1.45;
+    }
+
+    .service-pillar-lead {
+      font-size: 0.98rem;
+      color: var(--silver);
+      line-height: 2;
+      font-weight: 300;
+      margin-bottom: 2.25rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(192, 192, 192, 0.06);
+    }
+
+    .service-detail {
+      margin-bottom: 2.5rem;
+    }
+
+    .service-detail:last-child {
+      margin-bottom: 0;
+    }
+
+    .service-detail h4 {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--light-silver);
+      font-weight: 600;
+      margin-bottom: 1.1rem;
+      letter-spacing: 0.03em;
+    }
+
+    .service-block-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin: 1.25rem 0 0.6rem;
+    }
+
+    .service-block-label:first-of-type {
+      margin-top: 0;
+    }
+
+    .service-detail p {
+      font-size: 0.93rem;
+      color: var(--silver);
+      line-height: 2;
+      font-weight: 300;
+    }
+
+    .service-detail p strong {
+      color: var(--platinum);
+      font-weight: 600;
+    }
+
+    .service-contract-list {
+      margin: 0.75rem 0 0 0;
+      padding-left: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--silver);
+      line-height: 1.95;
+      font-weight: 300;
+    }
+
+    .service-contract-list li {
+      margin-bottom: 0.65rem;
+    }
+
+    .service-pillar-visual {
+      margin-top: 2rem;
+      border-radius: 2px;
+      overflow: hidden;
+      border: 1px solid rgba(192, 192, 192, 0.06);
+    }
+
+    .service-pillar-visual img {
+      width: 100%;
+      display: block;
+      filter: brightness(0.92) saturate(0.88);
+    }
+
+    /* ===== Team Section ===== */
+    .team-section {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(50, 50, 50, 0.3) 0%, transparent 60%),
+        var(--graphite);
+    }
+
+    .team-intro {
+      max-width: 800px;
+      margin: 0 auto 4rem;
+      text-align: center;
+      font-size: 1rem;
+      color: var(--silver);
+      line-height: 2;
+      font-weight: 300;
+    }
+
+    .team-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .team-card {
+      background: rgba(26, 26, 26, 0.6);
+      border: 1px solid rgba(192, 192, 192, 0.04);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: all 0.4s;
+      position: relative;
+    }
+
+    .team-card:hover {
+      background: rgba(42, 42, 42, 0.5);
+      border-color: rgba(192, 192, 192, 0.1);
+    }
+
+    .team-card-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--charcoal), var(--graphite));
+      border: 1px solid var(--dark-gray);
+      border-radius: 50%;
+    }
+
+    .team-card-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--light-silver);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .team-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+
+    .team-card .team-en {
+      font-size: 0.65rem;
+      color: var(--mid-gray);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .team-card p {
+      font-size: 0.88rem;
+      color: var(--silver);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* ===== Principles Section ===== */
+    .principles-section {
+      background: var(--black);
+      position: relative;
+    }
+
+    .principles-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, var(--dark-gray), transparent);
+    }
+
+    .principles-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
+    }
+
+    .principle-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 2.5rem;
+      align-items: start;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid rgba(192, 192, 192, 0.04);
+    }
+
+    .principle-number {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 700;
+      background: var(--accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .principle-content h3 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    .principle-content .principle-en {
+      font-size: 0.65rem;
+      color: var(--mid-gray);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .principle-content p {
+      font-size: 0.95rem;
+      color: var(--silver);
+      line-height: 2;
+      font-weight: 300;
+    }
+
+    /* ===== CTA Section ===== */
+    .cta-section {
+      padding: 10rem 4rem;
+      text-align: center;
+      position: relative;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(60, 60, 60, 0.15) 0%, transparent 70%),
+        var(--graphite);
+    }
+
+    .cta-section .cta-overline {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 2rem;
+    }
+
+    .cta-section h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.08em;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-section p {
+      font-size: 1rem;
+      color: var(--silver);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      line-height: 2;
+      font-weight: 300;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 3rem;
+      border: 1px solid var(--silver);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--white);
+      transform: translateX(-101%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .cta-btn:hover::before { transform: translateX(0); }
+    .cta-btn:hover { color: var(--black); border-color: var(--white); }
+    .cta-btn span { position: relative; z-index: 1; }
+    .cta-btn svg { position: relative; z-index: 1; width: 16px; height: 16px; transition: transform 0.3s; }
+    .cta-btn:hover svg { transform: translateX(4px); }
+
+    /* ===== Footer ===== */
+    .footer {
+      padding: 4rem;
+      border-top: 1px solid rgba(192, 192, 192, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--black);
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .footer-brand img {
+      width: 36px;
+      height: auto;
+      max-height: 34px;
+      object-fit: contain;
+      border: none;
+      outline: none;
+    }
+
+    .footer-brand-name {
+      font-family: var(--font-serif);
+      font-size: 0.85rem;
+      color: var(--silver);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--mid-gray);
+      letter-spacing: 0.08em;
+    }
+
+    /* ===== Reveal Animation ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ===== Keyframes ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .section { padding: 6rem 2.5rem; }
+      .nav { padding: 1.2rem 2rem; }
+      .nav.scrolled { padding: 0.8rem 2rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        padding: 0.85rem max(1rem, env(safe-area-inset-right)) 0.85rem max(1rem, env(safe-area-inset-left));
+        padding-top: max(0.85rem, env(safe-area-inset-top));
+      }
+
+      .nav.scrolled {
+        padding: 0.65rem max(1rem, env(safe-area-inset-right)) 0.65rem max(1rem, env(safe-area-inset-left));
+        padding-top: max(0.65rem, env(safe-area-inset-top));
+      }
+
+      .nav-logo-text {
+        font-size: 0.95rem;
+        letter-spacing: 0.1em;
+        max-width: 52vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-backdrop {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: min(100%, 20rem);
+        max-width: 100vw;
+        margin: 0;
+        padding: calc(4.5rem + env(safe-area-inset-top)) 1.5rem 2rem;
+        padding-left: max(1.5rem, env(safe-area-inset-left));
+        padding-right: max(1.5rem, env(safe-area-inset-right));
+        padding-bottom: max(2rem, env(safe-area-inset-bottom));
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0;
+        background: rgba(10, 10, 10, 0.97);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-left: 1px solid rgba(192, 192, 192, 0.08);
+        z-index: 1001;
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        list-style: none;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav.is-open .nav-links {
+        transform: translateX(0);
+      }
+
+      .nav-links li {
+        border-bottom: 1px solid rgba(192, 192, 192, 0.06);
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 1.15rem 0;
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
+      }
+
+      .nav-links a::after {
+        display: none;
+      }
+
+      .section {
+        padding: 4rem max(1rem, env(safe-area-inset-left)) 4rem max(1rem, env(safe-area-inset-right));
+        padding-bottom: max(4rem, env(safe-area-inset-bottom));
+      }
+
+      .section-header {
+        margin-bottom: 2.75rem;
+      }
+
+      .section-label::before,
+      .section-label::after {
+        width: 20px;
+      }
+
+      .section-title {
+        letter-spacing: 0.04em;
+        line-height: 1.35;
+      }
+
+      .hero {
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding-top: max(4.5rem, calc(env(safe-area-inset-top) + 3.5rem));
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+
+      .hero-content {
+        padding: 1rem max(0.75rem, env(safe-area-inset-left)) 1rem max(0.75rem, env(safe-area-inset-right));
+      }
+
+      .hero-logo-icon {
+        width: min(88vw, 260px);
+        height: auto;
+        margin-bottom: 1.5rem;
+      }
+
+      .hero-title {
+        letter-spacing: 0.08em;
+        font-size: clamp(1.35rem, 6.5vw, 2.2rem);
+        line-height: 1.25;
+      }
+
+      .hero-subtitle {
+        letter-spacing: 0.2em;
+        font-size: clamp(0.7rem, 2.8vw, 0.9rem);
+        margin-bottom: 1.75rem;
+      }
+
+      .hero-tagline {
+        font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+        line-height: 1.85;
+        padding: 0 0.25rem;
+      }
+
+      .hero-scroll {
+        bottom: max(1.5rem, env(safe-area-inset-bottom));
+      }
+
+      .pain-quote {
+        padding: 1.75rem 1.25rem 1.75rem 1.5rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .pain-quote::before {
+        font-size: 3.5rem;
+        left: 0.75rem;
+      }
+
+      .pain-quote p {
+        font-size: 1rem;
+        line-height: 2;
+      }
+
+      .mission-block {
+        grid-template-columns: 3px 1fr;
+        gap: 1.25rem;
+        padding: 2rem 0;
+      }
+
+      .mission-text h3 {
+        font-size: 1.2rem;
+      }
+
+      .service-card {
+        padding: 1.5rem 1.25rem;
+      }
+
+      .service-card h3 {
+        font-size: 1.1rem;
+      }
+
+      .services-pillars {
+        gap: 2.75rem;
+      }
+
+      .service-pillar {
+        padding: 1.75rem 1.25rem;
+      }
+
+      .service-pillar-lead {
+        margin-bottom: 1.75rem;
+        padding-bottom: 1.5rem;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-intro br {
+        display: none;
+      }
+
+      .team-intro {
+        margin-bottom: 2.5rem;
+        padding: 0 0.25rem;
+      }
+
+      .team-card {
+        padding: 1.75rem 1.25rem;
+      }
+
+      .principles-section::before {
+        height: 48px;
+      }
+
+      .principles-list {
+        gap: 2rem;
+      }
+
+      .principle-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1.75rem 0;
+      }
+
+      .principle-number {
+        font-size: 2rem;
+      }
+
+      .principle-content h3 {
+        font-size: 1.1rem;
+      }
+
+      .principle-content p {
+        font-size: 0.92rem;
+      }
+
+      .cta-section {
+        padding: 5rem max(1rem, env(safe-area-inset-left)) 5rem max(1rem, env(safe-area-inset-right));
+        padding-bottom: max(5rem, env(safe-area-inset-bottom));
+      }
+
+      .cta-btn {
+        width: 100%;
+        max-width: 20rem;
+        justify-content: center;
+        padding: 1rem 1.5rem;
+        min-height: 48px;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 1.25rem;
+        text-align: center;
+        padding: 2.5rem max(1rem, env(safe-area-inset-left)) max(2.5rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-right));
+      }
+
+      .footer-copy {
+        font-size: 0.7rem;
+        line-height: 1.7;
+        max-width: 100%;
+        padding: 0 0.5rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .hero-title {
+        font-size: 1.15rem;
+        letter-spacing: 0.06em;
+      }
+
+      .section-title {
+        font-size: 1.45rem;
+      }
+
+      .nav-logo-text {
+        display: none;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="img/logo-transparent.png" alt="Obsidia Prime">
+      <span class="nav-logo-text">Obsidia Prime</span>
+    </a>
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false" aria-controls="navLinks">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">标准介绍</a></li>
+      <li><a href="#about">关于黑曜</a></li>
+      <li><a href="#services">专属服务</a></li>
+      <li><a href="#team">精英团队</a></li>
+      <li><a href="#principles">服务原则</a></li>
+      <li><a href="#contact">联系我们</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-geometric"></div>
+    <div class="hero-content">
+      <div class="hero-logo-icon">
+        <img src="img/logo-transparent.png" alt="Obsidia Prime Logo">
+      </div>
+      <h1 class="hero-title">黑曜 OBSIDIA PRIME</h1>
+      <p class="hero-subtitle">不动产管理顾问事务所</p>
+      <div class="hero-divider"></div>
+      <p class="hero-tagline">
+        以家族办公室与投资银行的最高标准<br>
+        为您提供跨越经济周期的不动产财富管家服务
+      </p>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- About / Pain Point -->
+  <section class="section pain-section" id="about">
+    <div class="section-header reveal">
+      <div class="section-label">Chapter I</div>
+      <h2 class="section-title">您需要的不只是买卖<br>而是资产重组</h2>
+      <p class="section-desc">当前的房地产市场正经历深度的结构性分化，核心城市的高价值资产依然坚挺，但交易逻辑已彻底改变</p>
+    </div>
+
+    <div class="pain-quote reveal">
+      <p>
+        对于高净值人群而言，传统的房屋挂牌模式已经失效。房子挂网半年毫无动静，每天却要忍受无数中介的电话骚扰和无底线的压价劝说。<br><br>
+        <span class="highlight">您真正需要的，不是一个带看开门的中介，而是解决资金流动性、家企风险隔离以及代际传承的综合方案。</span>
+      </p>
+    </div>
+
+    <div class="mission-block reveal">
+      <div class="mission-line"></div>
+      <div class="mission-text">
+        <h3>黑曜的使命</h3>
+        <p>黑曜（Obsidia Prime）是面向高净值人群复杂不动产资产配置需求的专业服务商。我们以"家族办公室"和"投资银行"的最高标准，为您提供跨越经济周期的不动产财富管家服务。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services — 产品线版本（本页独立，与 index.html 区分） -->
+  <section class="section section-darker" id="services">
+    <div class="section-header reveal">
+      <div class="section-label">Chapter II</div>
+      <h2 class="section-title">黑曜专属服务</h2>
+      <p class="section-desc">卖方端、买方端与长效体验三线产品，对标家族办公室与投行交付标准</p>
+    </div>
+
+    <div class="services-pillars">
+      <!-- 卖方端 -->
+      <article class="service-pillar reveal">
+        <p class="service-pillar-tag">Seller Side</p>
+        <h3 class="service-pillar-title">一、卖方端产品服务：核心资产极速去化与流动性释放</h3>
+        <p class="service-pillar-lead">卖方端的核心诉求是获取流动性与高溢价，服务设计围绕<strong>「全案总包」</strong>和<strong>「税务极小化」</strong>展开。</p>
+
+        <div class="service-detail">
+          <h4>1. 房源诊断与资产重新定价</h4>
+          <p class="service-block-label">服务内容</p>
+          <p>拒绝盲目挂牌，代理人需对房源的物理品质、权属清晰度（如查封、抵押、居住权）、地段产业赋能及学区优势进行多维度体检与深度背调。基于大数据的周边成交参考及波动趋势，协助卖方制定符合市场规律的精准定价策略。</p>
+          <p class="service-block-label">核心交付物</p>
+          <p><strong>《房源诊断报告》</strong>（为底层数据提供真实性保障）与<strong>《市场动态月报》</strong>（提供区域同类房源成交趋势与宏观信贷预警，作为定价依据）。</p>
+        </div>
+
+        <div class="service-detail">
+          <h4>2. 资产视觉重塑与庄家式推广</h4>
+          <p class="service-block-label">服务内容</p>
+          <p>提供专业的清洁布置、空间美化（Staging）及软装焕新建议。协助产出包含资产历史圈层、不可复制区位价值等「故事化」表达的极具溢价感的内容包装。作为总包方，将房源录入系统并设定极高分佣比例，调动全网普通中介作为分包商疯狂推盘。</p>
+          <p class="service-block-label">核心交付物</p>
+          <p>定制化的高端图文/视频营销内容，以及定期向业主汇报的<strong>《营销效果分析》</strong>（包含曝光数据、带看转化率、买受人负面反馈及出价对比）。</p>
+        </div>
+
+        <div class="service-detail">
+          <h4>3. 复杂产权剥离与税务筹划</h4>
+          <p class="service-block-label">服务内容</p>
+          <p>针对企业代持豪宅、离婚析产或「卖旧买新」的连环单，中台税务筹划专家直接介入，通过股权转让、特殊重组等合规路径，将数百万的税务摩擦降至合法极小值。</p>
+          <p class="service-block-label">核心交付物</p>
+          <p>厚达数页、由专业机构背书的<strong>《XX资产税务剥离与交易架构全案规划书》</strong>（以此作为收取高额前置咨询费的绝对支点）。</p>
+        </div>
+
+        <div class="service-pillar-visual"><img src="img/service-3.png" alt="卖方端资产视觉与推广" loading="lazy"></div>
+      </article>
+
+      <!-- 买方端 -->
+      <article class="service-pillar reveal">
+        <p class="service-pillar-tag">Buyer Side</p>
+        <h3 class="service-pillar-title">二、买方端产品服务：核心资产寻猎与底线防御</h3>
+        <p class="service-pillar-lead">买方端的服务设计旨在打破信息孤岛，提供刺刀见红的谈判护航与底层风险隔离。</p>
+
+        <div class="service-detail">
+          <h4>1. 需求深度画像与暗盘寻猎</h4>
+          <p class="service-block-label">服务内容</p>
+          <p>挖掘买方的底层资产配置需求（如学区赋能、地段宜居性及未来流动性）。利用 AI 与底层日志建立多维估值模型，为买方在全域（含未公开暗盘）寻找匹配标的，并在谈判桌上提供极限议价的底层数据支撑。</p>
+          <p class="service-block-label">核心交付物</p>
+          <p>排版精良、逻辑严密的定制化商业 PPT / <strong>《资产价值评估书》</strong>（包含邻里圈层质量、周边环境交通变迁对长期价值的深度分析）。</p>
+        </div>
+
+        <div class="service-detail">
+          <h4>2. 「一票否决」的尽职调查与风险隔离</h4>
+          <p class="service-block-label">服务内容</p>
+          <p>中台法务团队对目标房源的产权状态（抵押、查封、居住权）进行独立核实。在交易中代表买方进行极端条款优化，甚至在发现合规漏洞时行使<strong>「一票否决权（Veto Power）」</strong>强制中止交易。同时，协助搭建有限合伙企业（LLC）或信托以实现婚前财产与企业风险的物理隔离。</p>
+          <p class="service-block-label">核心交付物</p>
+          <p><strong>《婚前房产代持与风险隔离法律意见书》</strong>、<strong>《家庭房产置换税务健康度体检报告》</strong>。</p>
+        </div>
+
+        <div class="service-pillar-visual"><img src="img/service-2.png" alt="买方端谈判与风控" loading="lazy"></div>
+      </article>
+
+      <!-- 交互与智库 -->
+      <article class="service-pillar reveal">
+        <p class="service-pillar-tag">Experience &amp; FO</p>
+        <h3 class="service-pillar-title">三、交互体验与长效智库服务</h3>
+        <p class="service-pillar-lead">除了单次交易的攻防，MVP 团队还需提供对标<strong>「家族办公室」</strong>的跨周期服务体验。</p>
+
+        <div class="service-detail">
+          <h4>1. 数字化交互与宏观洞察</h4>
+          <p class="service-block-label">服务内容</p>
+          <p>改变拿着手机 App 带看的中介习惯，将枯燥的数据转化为高净值人群关心的宏观经济与投资叙事。</p>
+          <p class="service-block-label">核心交付物</p>
+          <p>部署在 iPad 等设备上的<strong>交互式资产驾驶舱</strong>（动态展示客户资产配置、市场热力图与利润对比）；以及定期产出作为「敲门砖」的<strong>《核心区资产流动性与重组报告》</strong>。</p>
+        </div>
+
+        <div class="service-detail">
+          <h4>2. 契约与合规保障（终极信任交付）</h4>
+          <p class="service-block-label">服务内容</p>
+          <p>彻底杜绝双边代理的和稀泥行为，建立系统级与物理级的<strong>「信息隔离墙（指定代理）」</strong>。通过白纸黑字的严苛条款锁定利润天花板与服务底线。</p>
+          <p class="service-block-label">核心交付物</p>
+          <p>带有毁灭级保护效力的<strong>《高定资产单边代理协议》</strong> / <strong>《单边委托合同》</strong>。该合同必须包含三大硬核交付条款：</p>
+          <ul class="service-contract-list">
+            <li><strong>顶格保密协议（NDA）：</strong>承诺客户底牌不录入公域系统，泄密需承担巨额惩罚性赔偿。</li>
+            <li><strong>综合费率封顶条款（Fee Cap）：</strong>锁定单笔交易或连环单的总费用上限，消除客户财务失控的焦虑。</li>
+            <li><strong>净水承诺与解约权：</strong>承诺办理资金过桥、法税业务时零暗箱回扣，且赋予客户不满意随时解约的权利。</li>
+          </ul>
+        </div>
+
+        <div class="service-pillar-visual"><img src="img/service-1.png" alt="数字化交互与合规" loading="lazy"></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="section team-section" id="team">
+    <div class="section-header reveal">
+      <div class="section-label">Chapter III</div>
+      <h2 class="section-title">投行级特种兵团队</h2>
+      <p class="section-desc">双核驱动的精英阵型</p>
+    </div>
+
+    <p class="team-intro reveal">
+      为承接您极其复杂的家庭资产决策，黑曜彻底抛弃传统中介的人海战术，<br>
+      为您配备极度精简但硬核的特种兵团队。
+    </p>
+
+    <div class="team-grid">
+      <div class="team-card reveal reveal-delay-1">
+        <div class="team-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        </div>
+        <h4>前台高定顾问</h4>
+        <span class="team-en">Client Partner</span>
+        <p>您的唯一专属接口人和全案"总导演"，具备宏观经济叙事能力，负责需求挖掘、渠道统筹与交易全盘推进。</p>
+      </div>
+
+      <div class="team-card reveal reveal-delay-2">
+        <div class="team-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+        </div>
+        <h4>中台数据与研究</h4>
+        <span class="team-en">Data & Strategy Lead</span>
+        <p>团队的"雷达"，利用 AI 与底层大网数据清洗线索，出具精准的资产估值模型与市场流动性报告。</p>
+      </div>
+
+      <div class="team-card reveal reveal-delay-3">
+        <div class="team-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+        </div>
+        <h4>内容展示与营销</h4>
+        <span class="team-en">Content & Visual Marketing</span>
+        <p>负责房产美学包装、空间重塑以及专业视频流媒体内容的策划与精准投放，建立高端视觉壁垒。</p>
+      </div>
+
+      <div class="team-card reveal reveal-delay-1">
+        <div class="team-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        </div>
+        <h4>财法税解决专家</h4>
+        <span class="team-en">Solution Expert</span>
+        <p>100% 来自四大审计、红圈律所的跨界精英。解决婚前财产隔离、企业代持买卖、税务极小化剥离及千万级过桥资金方案。</p>
+      </div>
+
+      <div class="team-card reveal reveal-delay-2">
+        <div class="team-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+        </div>
+        <h4>履约交付管家</h4>
+        <span class="team-en">Concierge</span>
+        <p>类似高端酒店金钥匙，负责专车接送、高端茶歇、签约仪式场景布置及过户等极致体验交付。</p>
+      </div>
+
+      <div class="team-card reveal reveal-delay-3">
+        <div class="team-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        </div>
+        <h4>社群运营支持</h4>
+        <span class="team-en">Community Operations</span>
+        <p>统筹高净值圈层活动、闭门私享沙龙以及长期会员体系运营，将您接入顶级资源生态圈。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Principles -->
+  <section class="section principles-section" id="principles">
+    <div class="section-header reveal">
+      <div class="section-label">Chapter IV</div>
+      <h2 class="section-title">核心服务条款与原则</h2>
+      <p class="section-desc">绝对的单边立场 · 信任是我们服务的唯一基石</p>
+    </div>
+
+    <div class="principles-list">
+      <div class="principle-item reveal">
+        <div class="principle-number">01</div>
+        <div class="principle-content">
+          <h3>动态绝对单边代理</h3>
+          <span class="principle-en">100% Interest Alignment</span>
+          <p>传统中介为了撮合成交往往两头和稀泥，而我们在任何单次交易中，绝对只代表您一方的利益。当您卖房时，我们是死守底价的操盘手；当您买房时，我们是极限压价的防御盾。</p>
+        </div>
+      </div>
+
+      <div class="principle-item reveal">
+        <div class="principle-number">02</div>
+        <div class="principle-content">
+          <h3>绝不收取另一方的服务费</h3>
+          <span class="principle-en">Zero Conflict of Interest</span>
+          <p>我们郑重承诺，在交易中坚决不向交易对手收取任何形式的居间服务费或暗箱回扣。我们的唯一商业目标是捍卫您的资产溢价与交易安全。</p>
+        </div>
+      </div>
+
+      <div class="principle-item reveal">
+        <div class="principle-number">03</div>
+        <div class="principle-content">
+          <h3>绝对隐私保护与信息隔离</h3>
+          <span class="principle-en">Investment-Bank Grade Firewall</span>
+          <p>我们视客户隐私为底线。您的真实身份、企业背景与财务底牌将被录入独立的私有云"数据特区"，对全网实施极其严格的物理与系统隔离。采用"指定代理（Designated Agency）"的盲盒式发包机制，从根本上保证隐私安全，彻底杜绝内幕泄露和骚扰。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta-section" id="contact">
+    <p class="cta-overline reveal">Contact Us</p>
+    <h2 class="reveal">开启您的专属资产管理之旅</h2>
+    <p class="reveal">我们期待与您深度对话，共同守护和增值您的不动产财富</p>
+    <a href="mailto:contact@obsidia.com" class="cta-btn reveal">
+      <span>预约专享咨询</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <img src="img/logo-transparent.png" alt="Obsidia Prime">
+      <span class="footer-brand-name">Obsidia Prime</span>
+    </div>
+    <span class="footer-copy">&copy; 2026 黑曜 Obsidia Prime 不动产管理顾问事务所 · All Rights Reserved</span>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const navToggle = document.getElementById('navToggle');
+    const navBackdrop = document.getElementById('navBackdrop');
+    const navLinksEl = document.getElementById('navLinks');
+
+    function setNavOpen(open) {
+      nav.classList.toggle('is-open', open);
+      document.body.classList.toggle('nav-menu-open', open);
+      if (navToggle) {
+        navToggle.setAttribute('aria-expanded', open);
+        navToggle.setAttribute('aria-label', open ? '关闭菜单' : '打开菜单');
+      }
+      if (navBackdrop) navBackdrop.setAttribute('aria-hidden', !open);
+    }
+
+    function closeNav() {
+      setNavOpen(false);
+    }
+
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 80);
+    });
+
+    if (navToggle) {
+      navToggle.addEventListener('click', () => {
+        setNavOpen(!nav.classList.contains('is-open'));
+      });
+    }
+
+    if (navBackdrop) {
+      navBackdrop.addEventListener('click', closeNav);
+    }
+
+    if (navLinksEl) {
+      navLinksEl.querySelectorAll('a').forEach((a) => {
+        a.addEventListener('click', closeNav);
+      });
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) closeNav();
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && nav.classList.contains('is-open')) closeNav();
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
