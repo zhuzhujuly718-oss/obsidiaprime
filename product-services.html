@@ -531,21 +531,36 @@
       transition: all 0.5s;
     }
 
-    /* ===== Chapter II — 产品线 ===== */
+    /* ===== Chapter II — 产品线 2×2 网格 ===== */
     .services-pillars {
-      max-width: 860px;
+      max-width: 1200px;
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
     }
 
     .service-pillar {
       position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 2.5rem 2.25rem 2.25rem;
+      background: linear-gradient(160deg, rgba(42, 42, 42, 0.32), rgba(20, 20, 20, 0.65));
+      border: 1px solid rgba(192, 192, 192, 0.06);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .service-pillar::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(192, 192, 192, 0.15), transparent);
     }
 
     .service-pillar-tag {
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--mid-gray);
@@ -554,20 +569,20 @@
 
     .service-pillar-title {
       font-family: var(--font-serif);
-      font-size: clamp(1.25rem, 2.8vw, 1.6rem);
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
       color: var(--white);
       font-weight: 700;
-      letter-spacing: 0.06em;
-      margin-bottom: 1.15rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
       line-height: 1.5;
     }
 
     .service-pillar-lead {
-      font-size: 1rem;
+      font-size: 0.92rem;
       color: var(--silver);
-      line-height: 2;
+      line-height: 1.95;
       font-weight: 300;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
 
     .service-pillar-lead strong {
@@ -575,73 +590,38 @@
       font-weight: 600;
     }
 
-    .pillar-media {
-      margin: 0 0 3rem;
-      border-radius: 3px;
-      overflow: hidden;
-      border: 1px solid rgba(192, 192, 192, 0.08);
-      background: var(--graphite);
-    }
-
-    .pillar-media img {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-      display: block;
-      filter: brightness(0.93) saturate(0.9);
-    }
-
-    .pillar-media figcaption {
-      padding: 0.75rem 1.25rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--mid-gray);
-      border-top: 1px solid rgba(192, 192, 192, 0.06);
-    }
-
     .product-lines {
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 1rem;
+      flex: 1;
     }
 
     .product-card {
-      padding: 2rem 2.25rem;
-      background: linear-gradient(145deg, rgba(42, 42, 42, 0.45), rgba(26, 26, 26, 0.75));
-      border: 1px solid rgba(192, 192, 192, 0.06);
+      padding: 1.5rem 1.5rem;
+      background: rgba(10, 10, 10, 0.35);
+      border: 1px solid rgba(192, 192, 192, 0.04);
       border-radius: 2px;
       position: relative;
-      overflow: hidden;
-      transition: border-color 0.4s, box-shadow 0.4s;
-    }
-
-    .product-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(192, 192, 192, 0.15), transparent);
+      transition: border-color 0.4s;
     }
 
     @media (hover: hover) {
       .product-card:hover {
-        border-color: rgba(192, 192, 192, 0.12);
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        border-color: rgba(192, 192, 192, 0.1);
       }
     }
 
     .product-card-head {
       display: flex;
       align-items: baseline;
-      gap: 1.25rem;
-      margin-bottom: 1.5rem;
+      gap: 1rem;
+      margin-bottom: 1.15rem;
     }
 
     .product-card-num {
       font-family: var(--font-serif);
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: var(--dark-gray);
       line-height: 1;
@@ -650,10 +630,10 @@
 
     .product-card-head h4 {
       font-family: var(--font-serif);
-      font-size: 1.08rem;
+      font-size: 0.98rem;
       color: var(--white);
       font-weight: 600;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
       margin: 0;
     }
 
@@ -662,11 +642,11 @@
     }
 
     .product-card-body p {
-      font-size: 0.93rem;
+      font-size: 0.88rem;
       color: var(--silver);
-      line-height: 2;
+      line-height: 1.9;
       font-weight: 300;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1rem;
     }
 
     .product-card-body p:last-child {
@@ -679,17 +659,17 @@
     }
 
     .deliver-row {
-      margin-top: 1.5rem;
-      padding-top: 1.25rem;
+      margin-top: 1.15rem;
+      padding-top: 1rem;
       border-top: 1px solid rgba(192, 192, 192, 0.06);
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem 1.25rem;
+      gap: 0.4rem 0.75rem;
       align-items: center;
     }
 
     .deliver-label {
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--mid-gray);
@@ -698,27 +678,26 @@
 
     .deliver-tag {
       display: inline-block;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--light-silver);
-      padding: 0.3rem 0.85rem;
-      border: 1px solid rgba(192, 192, 192, 0.12);
+      padding: 0.25rem 0.7rem;
+      border: 1px solid rgba(192, 192, 192, 0.1);
       border-radius: 2px;
       font-weight: 400;
       letter-spacing: 0.02em;
-      white-space: nowrap;
     }
 
     .service-contract-list {
-      margin: 1rem 0 0;
-      padding-left: 1.2rem;
-      font-size: 0.9rem;
+      margin: 0.75rem 0 0;
+      padding-left: 1.1rem;
+      font-size: 0.85rem;
       color: var(--silver);
-      line-height: 1.9;
+      line-height: 1.85;
       font-weight: 300;
     }
 
     .service-contract-list li {
-      margin-bottom: 0.55rem;
+      margin-bottom: 0.45rem;
     }
 
     .service-contract-list strong {
@@ -1194,37 +1173,24 @@
       }
 
       .services-pillars {
-        gap: 4rem;
+        grid-template-columns: 1fr;
+        gap: 2rem;
       }
 
-      .service-pillar-lead {
-        margin-bottom: 1.75rem;
-      }
-
-      .pillar-media {
-        margin-bottom: 2rem;
+      .service-pillar {
+        padding: 1.75rem 1.25rem 1.5rem;
       }
 
       .product-card {
-        padding: 1.5rem 1.25rem;
+        padding: 1.25rem 1rem;
       }
 
-      .product-card-head {
-        gap: 1rem;
-        margin-bottom: 1.15rem;
+      .product-card-head h4 {
+        font-size: 0.92rem;
       }
 
-      .product-card-num {
-        font-size: 1.25rem;
-      }
-
-      .deliver-row {
-        gap: 0.4rem 0.75rem;
-      }
-
-      .deliver-tag {
-        font-size: 0.75rem;
-        padding: 0.25rem 0.65rem;
+      .product-card-body p {
+        font-size: 0.85rem;
       }
 
       .team-grid {
@@ -1395,25 +1361,20 @@
 
     <div class="services-pillars">
 
-      <!-- ══════ 卖方端 ══════ -->
-      <article class="service-pillar" id="seller">
-        <p class="service-pillar-tag reveal">Seller Side</p>
-        <h3 class="service-pillar-title reveal">卖方端：流动性释放与溢价塑造</h3>
-        <p class="service-pillar-lead reveal">以<strong>全案总包</strong>串联诊断、呈现与渠道分发；在企业代持、离婚析产等复杂退出场景下，由中台法税团队介入推进<strong>税务摩擦极小化</strong>。</p>
-
-        <figure class="pillar-media reveal">
-          <img src="img/product-seller-suite.png" alt="房源诊断、Staging 与重新定价" loading="lazy">
-          <figcaption>诊断 · 定价 · Staging · 数字内容包装</figcaption>
-        </figure>
+      <!-- ═══ 左上：卖方端 ═══ -->
+      <article class="service-pillar reveal" id="seller">
+        <p class="service-pillar-tag">Seller Side</p>
+        <h3 class="service-pillar-title">卖方端：流动性释放与溢价塑造</h3>
+        <p class="service-pillar-lead">以<strong>全案总包</strong>串联诊断、呈现与渠道；在复杂退出场景下由中台法税介入推进<strong>税务摩擦极小化</strong>。</p>
 
         <div class="product-lines">
-          <div class="product-card reveal">
+          <div class="product-card">
             <div class="product-card-head">
               <span class="product-card-num">01</span>
               <h4>房源诊断与重新定价</h4>
             </div>
             <div class="product-card-body">
-              <p>拒绝盲目挂牌。对房源权属（查封、抵押、居住权）、地段产业赋能及学区价值进行多维体检；结合周边真实成交与波动趋势，锚定可辩护的价格区间。</p>
+              <p>对房源权属、地段产业赋能及学区价值多维体检，结合真实成交与波动趋势锚定可辩护的价格区间。</p>
               <div class="deliver-row">
                 <span class="deliver-label">交付</span>
                 <span class="deliver-tag">《房源诊断报告》</span>
@@ -1422,63 +1383,51 @@
             </div>
           </div>
 
-          <div class="product-card reveal">
+          <div class="product-card">
             <div class="product-card-head">
               <span class="product-card-num">02</span>
               <h4>视觉呈现与总包推盘</h4>
             </div>
             <div class="product-card-body">
-              <p>提供 Staging 空间呈现建议，产出强调圈层与区位稀缺性的故事化图文 / 视频内容包。作为总包方系统化录入并设定高分佣比例，调动渠道高效推盘。</p>
+              <p>Staging 空间呈现 + 故事化图文/视频内容包装；以总包方身份系统化录入并设定高分佣比例，调动渠道高效推盘。</p>
               <div class="deliver-row">
                 <span class="deliver-label">交付</span>
-                <span class="deliver-tag">定制图文 / 视频物料</span>
+                <span class="deliver-tag">定制图文/视频物料</span>
                 <span class="deliver-tag">《营销效果分析》</span>
               </div>
             </div>
           </div>
-        </div>
 
-        <figure class="pillar-media reveal">
-          <img src="img/product-seller-tax.png" alt="产权剥离与税务架构设计" loading="lazy">
-          <figcaption>合规路径 · 3DT 交易架构 · 税务极小化</figcaption>
-        </figure>
-
-        <div class="product-lines">
-          <div class="product-card reveal">
+          <div class="product-card">
             <div class="product-card-head">
               <span class="product-card-num">03</span>
               <h4>复杂产权剥离与税务筹划</h4>
             </div>
             <div class="product-card-body">
-              <p>针对企业代持豪宅、离婚析产或「卖旧买新」连环单，中台税务专家直接介入，通过产权剥离、股权转让、特殊重组等合规路径组合，将数百万级税务摩擦压降至合法极小值。</p>
+              <p>企业代持、离婚析产或连环置换等场景，通过产权剥离、股权转让、特殊重组等合规路径组合压降税务摩擦至合法极小值。</p>
               <div class="deliver-row">
                 <span class="deliver-label">交付</span>
-                <span class="deliver-tag">《资产税务剥离与交易架构全案规划书》</span>
+                <span class="deliver-tag">《税务剥离与交易架构全案规划书》</span>
               </div>
             </div>
           </div>
         </div>
       </article>
 
-      <!-- ══════ 买方端 ══════ -->
-      <article class="service-pillar" id="buyer">
-        <p class="service-pillar-tag reveal">Buyer Side</p>
-        <h3 class="service-pillar-title reveal">买方端：寻猎标的与底线防御</h3>
-        <p class="service-pillar-lead reveal">打破信息孤岛，在谈判与履约全链路提供数据与法务支撑；发现重大合规瑕疵时行使<strong>一票否决权</strong>，并配套资产隔离结构建议。</p>
-
-        <figure class="pillar-media reveal">
-          <img src="img/product-buyer-legal.png" alt="尽职调查、一票否决与法律穹顶" loading="lazy">
-          <figcaption>尽调 · Veto Power · 资产隔离</figcaption>
-        </figure>
+      <!-- ═══ 右上：买方端 ═══ -->
+      <article class="service-pillar reveal" id="buyer">
+        <p class="service-pillar-tag">Buyer Side</p>
+        <h3 class="service-pillar-title">买方端：寻猎标的与底线防御</h3>
+        <p class="service-pillar-lead">打破信息孤岛，全链路数据与法务支撑；发现重大合规瑕疵时行使<strong>一票否决权</strong>，并配套资产隔离结构。</p>
 
         <div class="product-lines">
-          <div class="product-card reveal">
+          <div class="product-card">
             <div class="product-card-head">
               <span class="product-card-num">01</span>
               <h4>需求画像与暗盘寻猎</h4>
             </div>
             <div class="product-card-body">
-              <p>深挖买方底层配置诉求（学区、宜居、远期流动性），利用多维估值模型在全域（含未公开暗盘）匹配标的，并为谈判提供逻辑闭合、数据可追溯的议价支撑。</p>
+              <p>深挖底层配置诉求（学区、宜居、远期流动性），多维估值模型在全域含未公开暗盘匹配标的，并提供逻辑闭合、可追溯的议价支撑。</p>
               <div class="deliver-row">
                 <span class="deliver-label">交付</span>
                 <span class="deliver-tag">定制商业演示材料</span>
@@ -1487,13 +1436,13 @@
             </div>
           </div>
 
-          <div class="product-card reveal">
+          <div class="product-card">
             <div class="product-card-head">
               <span class="product-card-num">02</span>
               <h4>尽职调查与一票否决</h4>
             </div>
             <div class="product-card-body">
-              <p>中台法务独立核实产权状态（抵押、查封、居住权），代表买方进行极端条款优化；发现重大合规漏洞时可<strong>强制中止交易</strong>。同步协助搭建有限合伙或信托，实现婚前财产与企业风险的物理隔离。</p>
+              <p>中台法务独立核实产权状态，代表买方极端条款优化；发现重大合规漏洞时可<strong>强制中止交易</strong>。同步搭建有限合伙或信托实现婚前财产与企业风险的物理隔离。</p>
               <div class="deliver-row">
                 <span class="deliver-label">交付</span>
                 <span class="deliver-tag">《风险隔离法律意见书》</span>
@@ -1504,44 +1453,82 @@
         </div>
       </article>
 
-      <!-- ══════ 交互与智库 ══════ -->
-      <article class="service-pillar" id="experience">
-        <p class="service-pillar-tag reveal">Experience &amp; Family Office</p>
-        <h3 class="service-pillar-title reveal">交互体验与长效智库</h3>
-        <p class="service-pillar-lead reveal">单次交易之外，以对标<strong>家族办公室</strong>的交互品质与研报节奏，沉淀可复用的资产视图与信任契约。</p>
+      <!-- ═══ 左下：交互体验与契约保障 ═══ -->
+      <article class="service-pillar reveal" id="experience">
+        <p class="service-pillar-tag">Trust Delivery</p>
+        <h3 class="service-pillar-title">交互体验与契约保障</h3>
+        <p class="service-pillar-lead">以对标<strong>家族办公室</strong>的交互品质与严苛契约，沉淀可复用的资产视图与终极信任。</p>
 
         <div class="product-lines">
-          <div class="product-card reveal">
+          <div class="product-card">
             <div class="product-card-head">
               <span class="product-card-num">01</span>
               <h4>数字化交互与宏观洞察</h4>
             </div>
             <div class="product-card-body">
-              <p>将市场数据转译为高净值人群关心的宏观经济与投资叙事，通过私域设备端（iPad 等）可视化呈现配置结构、热力图与情景对比。</p>
+              <p>将市场数据转译为宏观经济与投资叙事，通过私域设备可视化呈现配置结构、热力图与情景对比。</p>
               <div class="deliver-row">
                 <span class="deliver-label">交付</span>
                 <span class="deliver-tag">交互式资产驾驶舱</span>
-                <span class="deliver-tag">《核心区资产流动性报告》</span>
+                <span class="deliver-tag">《资产流动性报告》</span>
               </div>
             </div>
           </div>
 
-          <div class="product-card reveal">
+          <div class="product-card">
             <div class="product-card-head">
               <span class="product-card-num">02</span>
-              <h4>契约与合规 · 信息隔离墙</h4>
+              <h4>契约与信息隔离墙</h4>
             </div>
             <div class="product-card-body">
-              <p>建立系统级<strong>信息隔离墙</strong>与指定代理机制，杜绝双边和稀泥。通过白纸黑字的严苛条款锁定服务边界：</p>
+              <p>系统级<strong>信息隔离墙</strong>与指定代理机制，杜绝双边代理；严苛条款锁定服务边界：</p>
               <ul class="service-contract-list">
-                <li><strong>NDA：</strong>客户底牌不进公域系统，泄密承担惩罚性赔偿。</li>
-                <li><strong>Fee Cap：</strong>单笔或连环单总费用上限约定，消除财务失控焦虑。</li>
-                <li><strong>净水与解约：</strong>过桥与法税环节零暗箱回扣，不满意可随时解约。</li>
+                <li><strong>NDA —</strong> 底牌不进公域，泄密承担惩罚性赔偿。</li>
+                <li><strong>Fee Cap —</strong> 单笔或连环单总费用上限约定。</li>
+                <li><strong>净水与解约 —</strong> 零暗箱回扣，不满意可随时解约。</li>
               </ul>
               <div class="deliver-row">
                 <span class="deliver-label">交付</span>
-                <span class="deliver-tag">《高定资产单边代理协议》</span>
+                <span class="deliver-tag">《单边代理协议》</span>
                 <span class="deliver-tag">《单边委托合同》</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ═══ 右下：资产管理全周期陪伴 ═══ -->
+      <article class="service-pillar reveal" id="lifecycle">
+        <p class="service-pillar-tag">Lifecycle Partnership</p>
+        <h3 class="service-pillar-title">资产管理全周期陪伴</h3>
+        <p class="service-pillar-lead">房产交割只是开始。市场、理财、教育<strong>异业联动</strong>，让每一次资源对接都有黑曜的品质背书。</p>
+
+        <div class="product-lines">
+          <div class="product-card">
+            <div class="product-card-head">
+              <span class="product-card-num">01</span>
+              <h4>核心区市场暗报与趋势洞察</h4>
+            </div>
+            <div class="product-card-body">
+              <p>每周为您整理推送高净值人群极度关注的核心区地产市场流动性暗报、全球理财对冲趋势以及国际名校教育规划信息，确保您始终掌握决策先机。</p>
+              <div class="deliver-row">
+                <span class="deliver-label">交付</span>
+                <span class="deliver-tag">《核心区地产流动性与重组暗报》</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-card-head">
+              <span class="product-card-num">02</span>
+              <h4>顶级异业资源对接</h4>
+            </div>
+            <div class="product-card-body">
+              <p>无论设立家族信托、办理海外身份还是高端理财，通过顶级异业合作网络——私人银行、红圈律所、教育规划机构——为您无缝对接专属资源。</p>
+              <div class="deliver-row">
+                <span class="deliver-label">交付</span>
+                <span class="deliver-tag">闭门私享沙龙入场券</span>
+                <span class="deliver-tag">私行RM/红圈律师面诊通道</span>
               </div>
             </div>
           </div>
