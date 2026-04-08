@@ -1004,6 +1004,95 @@
     .cta-btn svg { position: relative; z-index: 1; width: 16px; height: 16px; transition: transform 0.3s; }
     .cta-btn:hover svg { transform: translateX(4px); }
 
+    /* ===== Lead Modal ===== */
+    .lead-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s, visibility 0.35s;
+    }
+
+    .lead-overlay.is-visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lead-modal {
+      width: min(420px, calc(100vw - 2rem));
+      background: linear-gradient(160deg, var(--charcoal), var(--graphite));
+      border: 1px solid rgba(192, 192, 192, 0.1);
+      border-radius: 4px;
+      padding: 2.75rem 2.5rem 2.25rem;
+      position: relative;
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .lead-overlay.is-visible .lead-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .lead-modal-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      width: 36px; height: 36px;
+      border: none; background: transparent;
+      color: var(--silver); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: color 0.3s;
+    }
+    .lead-modal-close:hover { color: var(--white); }
+    .lead-modal-close svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+    .lead-modal h3 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem; color: var(--white);
+      font-weight: 700; letter-spacing: 0.05em; margin-bottom: 0.5rem;
+    }
+    .lead-modal-sub { font-size: 0.82rem; color: var(--silver); margin-bottom: 2rem; line-height: 1.6; }
+
+    .lead-row { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
+    .lead-field { flex: 1; display: flex; flex-direction: column; gap: 0.4rem; }
+    .lead-field label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid-gray); }
+    .lead-field input, .lead-field select {
+      width: 100%; padding: 0.7rem 0.85rem;
+      background: rgba(10, 10, 10, 0.6); border: 1px solid rgba(192, 192, 192, 0.12);
+      border-radius: 2px; color: var(--white); font-family: var(--font-sans); font-size: 0.92rem;
+      outline: none; transition: border-color 0.3s; -webkit-appearance: none; appearance: none;
+    }
+    .lead-field input:focus, .lead-field select:focus { border-color: rgba(192, 192, 192, 0.35); }
+    .lead-field input::placeholder { color: var(--dark-gray); }
+    .lead-field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236a6a6a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 0.75rem center; padding-right: 2rem;
+    }
+    .lead-field select option { background: var(--graphite); color: var(--platinum); }
+    .lead-field--title { flex: 0 0 6.5rem; }
+
+    .lead-submit {
+      width: 100%; margin-top: 0.75rem; padding: 0.85rem;
+      border: 1px solid var(--silver); background: transparent; color: var(--white);
+      font-family: var(--font-sans); font-size: 0.85rem; letter-spacing: 0.18em;
+      cursor: pointer; position: relative; overflow: hidden; transition: all 0.4s;
+    }
+    .lead-submit::before { content:''; position:absolute; inset:0; background:var(--white); transform:translateX(-101%); transition:transform 0.4s cubic-bezier(0.4,0,0.2,1); }
+    .lead-submit:hover::before { transform: translateX(0); }
+    .lead-submit:hover { color: var(--black); border-color: var(--white); }
+    .lead-submit span { position: relative; z-index: 1; }
+
+    .lead-success { display: none; text-align: center; padding: 1rem 0; }
+    .lead-success.is-visible { display: block; }
+    .lead-success p { font-family: var(--font-serif); font-size: 1.1rem; color: var(--white); margin-bottom: 0.5rem; }
+    .lead-success small { font-size: 0.82rem; color: var(--silver); }
+
     /* ===== Footer ===== */
     .footer {
       padding: 4rem;
@@ -1749,11 +1838,47 @@
     <p class="cta-overline reveal">Contact Us</p>
     <h2 class="reveal">开启您的专属资产管理之旅</h2>
     <p class="reveal">我们期待与您深度对话，共同守护和增值您的不动产财富</p>
-    <a href="mailto:contact@obsidia.com" class="cta-btn reveal">
+    <button type="button" class="cta-btn reveal" id="openLead">
       <span>预约专享咨询</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </a>
+    </button>
   </section>
+
+  <div class="lead-overlay" id="leadOverlay">
+    <div class="lead-modal">
+      <button type="button" class="lead-modal-close" id="closeLead">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <h3>预约专享咨询</h3>
+      <p class="lead-modal-sub">留下您的联系方式，黑曜顾问将在24小时内与您联系</p>
+      <form id="leadForm">
+        <div class="lead-row">
+          <div class="lead-field">
+            <label for="leadName">姓氏</label>
+            <input type="text" id="leadName" placeholder="请输入您的姓氏" required>
+          </div>
+          <div class="lead-field lead-field--title">
+            <label for="leadTitle">称呼</label>
+            <select id="leadTitle">
+              <option value="先生">先生</option>
+              <option value="女士">女士</option>
+            </select>
+          </div>
+        </div>
+        <div class="lead-row">
+          <div class="lead-field">
+            <label for="leadPhone">手机号码</label>
+            <input type="tel" id="leadPhone" placeholder="请输入您的手机号码" required pattern="[0-9]{11}" maxlength="11">
+          </div>
+        </div>
+        <button type="submit" class="lead-submit"><span>提交预约</span></button>
+      </form>
+      <div class="lead-success" id="leadSuccess">
+        <p>预约成功</p>
+        <small>黑曜顾问将尽快与您联系，感谢您的信任</small>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer class="footer">
@@ -1821,6 +1946,37 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const leadOverlay = document.getElementById('leadOverlay');
+    const leadForm = document.getElementById('leadForm');
+    const leadSuccess = document.getElementById('leadSuccess');
+
+    function openLead() {
+      leadOverlay.classList.add('is-visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLead() {
+      leadOverlay.classList.remove('is-visible');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('openLead').addEventListener('click', openLead);
+    document.getElementById('closeLead').addEventListener('click', closeLead);
+    leadOverlay.addEventListener('click', (e) => { if (e.target === leadOverlay) closeLead(); });
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && leadOverlay.classList.contains('is-visible')) closeLead(); });
+
+    leadForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('leadName').value.trim();
+      const title = document.getElementById('leadTitle').value;
+      const phone = document.getElementById('leadPhone').value.trim();
+      if (!name || !phone || phone.length < 11) return;
+      leadForm.style.display = 'none';
+      leadSuccess.classList.add('is-visible');
+      console.log('Lead:', name + title, phone);
+      setTimeout(closeLead, 2500);
+    });
   </script>
 </body>
 </html>
